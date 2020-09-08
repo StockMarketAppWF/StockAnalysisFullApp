@@ -3,7 +3,7 @@
 ## Special thanks to Arun for guiding us through the project every step of the way.
 
 ## Gratitudes:
-To Wells Fargo IITH for providing the oppotunity !!
+To Wells Fargo IIHT for providing the oppotunity !!
 
 ## Contributors / Developers:
 * Karthikeyan Iyer 	  ( Cohort 4 )
