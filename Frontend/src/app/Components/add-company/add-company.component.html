@@ -1,0 +1,110 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<div class="submit-form">
+    <div *ngIf="!submitted">
+      <div class="form-group">
+
+        <label for="company_id">Company Id</label>
+        <input
+          type="number"
+          class="form-control"
+          id="company_id"
+          required
+          [(ngModel)]="company.company_id"
+          name="company_id"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="company_name">Company Name</label>
+        <input
+          class="form-control"
+          id="company_name"
+          required
+          [(ngModel)]="company.company_name"
+          name="company_name"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="turnover">Turn Over</label>
+        <input
+          class="form-control"
+          id="turnover"
+          required
+          [(ngModel)]="company.turnover"
+          name="turnover"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="ceo">CEO</label>
+        <input
+          class="form-control"
+          id="ceo"
+          required
+          [(ngModel)]="company.ceo"
+          name="ceo"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="board_of_directors">Board of directors</label>
+        <input
+          class="form-control"
+          id="board_of_directors"
+          required
+          [(ngModel)]="company.board_of_directors"
+          name="board_of_directors"
+        />
+      </div>
+
+
+      <div class="form-group">
+        <label for="write_up">Write Up</label>
+        <input
+          class="form-control"
+          id="write_up"
+          required
+          [(ngModel)]="company.write_up"
+          name="write_up"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="sector_id">Sector Id</label>
+        <input
+          class="form-control"
+          type="number"
+          id="sector_id"
+          required
+          [(ngModel)]="company.sector_id"
+          name="sector_id"
+        />
+      </div>
+
+      <button (click)="saveCompany()" class="btn btn-success">Submit</button>
+    </div>
+  
+    <div *ngIf="submitted">
+      <h4>You submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newCompany()">Add another Company</button>
+    </div>
+  </div>
+  

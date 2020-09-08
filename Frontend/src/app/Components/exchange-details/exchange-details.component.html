@@ -1,0 +1,257 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<link
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
+  rel="stylesheet"
+/>
+<div class="container-fluid primary-content">
+  <!-- PRIMARY CONTENT HEADING -->
+  <div class="primary-content-heading clearfix">
+    <h2>{{ item.brief }}</h2>
+    <!-- <h3>{{ this.selectedId }}</h3> -->
+    <hr style="border: 1px solid #fff" />
+    <div class="sticky-content pull-right">
+      <div class="btn-group btn-dropdown"></div>
+      <button
+        type="button"
+        class="btn btn-default btn-sm btn-quick-task"
+        data-toggle="modal"
+        data-target="#quick-task-modal"
+      >
+        <i class="fa fa-edit"></i> Edit Exchange
+      </button>
+      <br />
+      <br />
+    </div>
+    <!-- quick task modal -->
+    <div
+      class="modal fade"
+      id="quick-task-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-hidden="true"
+            >
+              ×
+            </button>
+            <!-- <h4 class="modal-title" id="myModalLabel">Edit Exchange</h4> -->
+          </div>
+          <div class="modal-body">
+            <form class="form-horizontal" role="form">
+              <div class="form-group">
+                <label for="newBrief">Brief</label>
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newBrief"
+                    value="{{ item.brief }}"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="newAddress">Address</label>
+                <div class="col-sm-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="newAddress"
+                    value="{{ item.address }}"
+                  />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="newRemarks">Description</label>
+                <div class="col-sm-12">
+                  <textarea
+                    class="form-control"
+                    rows="5"
+                    cols="30"
+                    value="{{ item.remarks }}"
+                    id="newRemarks"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row d-flex justify-content-center container">
+                <div class="col-md-8">
+                  <div class="card-hover-shadow-2x mb-3 card">
+                    <div class="card-header-tab card-header">
+                      <div
+                        class="card-header-title font-size-lg text-capitalize font-weight-normal"
+                      >
+                        <i class="fa fa-tasks"></i>&nbsp;Company List
+                      </div>
+                    </div>
+                    <div class="scroll-area-sm">
+                      <perfect-scrollbar class="ps-show-limits">
+                        <div style="position: static" class="ps ps--active-y">
+                          <div class="ps-content">
+                            <ul class="list-group list-group-flush">
+                              <li
+                                class="list-group-item"
+                                *ngFor="
+                                  let company of newCompaniesList;
+                                  let i = index
+                                "
+                              >
+                                <!-- <div class="todo-indicator bg-warning"></div> -->
+                                <div class="widget-content p-0">
+                                  <div class="widget-content-wrapper">
+                                    <!-- <div class="widget-content-left mr-2"></div> -->
+                                    <div class="widget-content-left">
+                                      <div class="widget-heading">
+                                        <a>{{ company.companyName }}</a>
+                                        <div class="badge badge-danger ml-2">
+                                          ID : {{ company.companyId }}
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="widget-content-right">
+                                      <button
+                                        class="border-0 btn-transition btn btn-outline-danger"
+                                        (click)="removeCompany(i)"
+                                      >
+                                        <i class="fa fa-trash"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </perfect-scrollbar>
+                    </div>
+                    <div class="d-block text-left card-footer">
+                      <ng-container>
+                        <p>
+                          <label #lblName id="lblName"> </label>
+                        </p>
+                      </ng-container>
+                      <div
+                        class="d-inline-block"
+                        ngbDropdown
+                        #myDrop="ngbDropdown"
+                      >
+                        <button
+                          type="button"
+                          class="btn btn-outline-primary"
+                          id="dropdownBasic1"
+                          ngbDropdownToggle
+                        >
+                          Company List
+                        </button>
+
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button
+                            type="button"
+                            ngbDropdownItem
+                            (click)="
+                              changeLabelName(
+                                lblName.id,
+                                companies[i].companyName,
+                                companies[i]
+                              )
+                            "
+                            *ngFor="let company of companies; let i = index"
+                          >
+                            {{ companies[i].companyName }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="d-block text-right card-footer">
+                      <button
+                        type="button"
+                        class="btn btn-primary"
+                        (click)="addCompany()"
+                      >
+                        Add New Company
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                (click)="editExchange()"
+              >
+                Save Exchange Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end quick task modal -->
+  </div>
+  <!-- END PRIMARY CONTENT HEADING -->
+  <div class="row">
+    <div class="col-md-8">
+      <div class="project-section general-info">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>Brief</td>
+              <td>{{ item.brief }}</td>
+            </tr>
+            <tr>
+              <td>Address:</td>
+              <td>{{ item.address }}</td>
+            </tr>
+            <tr>
+              <td>Remarks:</td>
+              <td>{{ item.remarks }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row">
+          <div class="col-sm-9">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <th scope="col">Company Name</th>
+                  <th scope="col">Company Id</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let company of item.company">
+                  <td>{{ company.companyName }}</td>
+                  <td>{{ company.companyId }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="project-section activity"></div>
+    </div>
+  </div>
+</div>

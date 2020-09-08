@@ -1,0 +1,67 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<div class="container">
+  <div class="file-upload-wrapper">
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" id="input-file-now" class="file-upload" (change)="onFileSelected($event)" >
+        <label class="custom-file-label" for="input-file-now" (change)="onFileSelected($event)">{{chooseFileMessage}}</label>
+      </div>
+      <button type="button"  class="btn btn-outline-primary" (click)="onUpload()">Upload</button>
+      <button type="button"  class="btn btn-success" (click)="downloadSample()">Download sample</button>
+    </div>
+    
+    <table class="table table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th  scope="col">Stock ID</th>
+          <th  scope="col">Company Code</th>
+          <th  scope="col">exchange_id</th>
+          <th  scope="col">price</th>
+          <th  scope="col">date</th>
+          <th  scope="col">time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let student of jsonInsertedDetails">
+          <td>{{ student.stockId }}</td>
+          <td>{{ student.companyCode }}</td>
+          <td>{{ student.date }}</td>
+          <td>{{ student.pricePerShare }}</td>
+          <td>{{ student.stockExchangeCode }}</td>
+          <td>{{ student.time }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!--<div class="btn btn-primary btn-sm float-left">
+  <input type="file" (change)="onFileSelected($event)">
+  <button type="button" (click)="onUpload()">Upload</button>
+</div> -->

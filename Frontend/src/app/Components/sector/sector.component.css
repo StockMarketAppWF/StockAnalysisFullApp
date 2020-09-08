@@ -1,0 +1,77 @@
+.full-width {
+    width: 100%;
+}
+.page-title {
+  text-align: center;
+}
+.sector-card {
+  margin-top: 10px;
+  margin-left: 10%;
+  width: 80%;
+}
+.title-text {
+  color: var(--app-name);
+}
+.details-container {
+  display: flex;
+}
+.sector-list{
+  flex: 1;
+  margin: 5px;
+}
+.company-list{
+  flex: 1;
+  margin: 5px;
+}
+.table {
+  padding: 5px;
+  border: 2px sold red;
+}
+.table-head {
+  border-bottom: 1px solid red;
+}
+.table-row {
+  text-align: center;
+}
+.table-data {
+  border-top: 1px solid red;
+}
+.compare-container {
+  display: flex;
+}
+.compare-select {
+  flex: 1;
+  margin: 5px;
+}
+.compare-form {
+  padding: 5px;
+  border: 2px solid red;
+}
+.sector-form {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.button {
+  color: yellow;
+  background-color: var(--primary-color);
+}
+.center{
+  text-align: center;
+}
+.compare-charts {
+  flex: 2;
+  margin: 5px;
+}
+
+.sector-name {
+  display: flex;
+}
+.sector-details {
+  flex: 1;
+}
+.compare-graph {
+  flex: 1;
+  margin: 2px;
+  padding: 2px;
+  border: 1px solid red;
+}

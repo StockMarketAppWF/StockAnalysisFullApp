@@ -1,0 +1,76 @@
+<body style="background-color:#40c4ff">
+<br/>
+<mat-card class="signup-bar">
+<h2 id="add-user-header">Sign Up</h2>
+</mat-card>
+<br/>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4" >
+    <div [hidden]="submitted" style="width: 400px;">
+      <form [formGroup]="studentsaveform" #saveuser (ngSubmit)="saveUser(saveUser)">
+        <mat-card>
+          <div class="form-group">
+              <label for="name">User Name</label>
+              <input type="text" class="form-control"  formControlName="username" data-toggle="tooltip" 
+                 data-placement="right" title="Enter User Name" >
+                
+              <div class="alert alert-danger" *ngIf = "(UserName.touched) && (UserName.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="UserName.errors.required">User Name is Required</span>
+                    <span *ngIf = "UserName.errors.minlength"> 
+                        MinLength Error 
+                    </span>                   
+                </div>
+          </div>
+        </mat-card>
+      <mat-card>
+          <div class="form-group">
+            <label for="name">Password</label>
+            <input type="password" class="form-control"  formControlName="password" data-toggle="tooltip" 
+               data-placement="right" title="Enter Password" >
+            <div class="alert alert-danger" *ngIf = "(UserPassword.touched) && (UserPassword.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="UserPassword.errors.required">Password is Required</span>
+                  <span *ngIf = "UserPassword.errors.minlength"> 
+                      MinLength Error 
+                  </span>                   
+              </div>
+        </div>
+      </mat-card><mat-card>
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" class="form-control"  formControlName="firstName" data-toggle="tooltip" 
+               data-placement="right" title="Enter Full Name" >
+            <div class="alert alert-danger" *ngIf = "(UserFullName.touched) && (UserFullName.invalid)" 
+              style="margin-top: 5px;">
+                <span *ngIf="UserFullName.errors.required">Full Name is Required</span>
+                  <span *ngIf = "UserFullName.errors.minlength"> 
+                      MinLength Error 
+                  </span>                   
+              </div>
+        </div>
+    </mat-card><mat-card>
+          <div class="form-group">
+              <label for="name">User Email</label>
+              <input type="text" class="form-control" formControlName="email" 
+                data-toggle="tooltip" data-placement="right" title="Enter Student Email">
+                <div class="alert alert-danger" *ngIf = "(UserEmail.touched) && (UserEmail.invalid)" 
+                style="margin-top: 5px;">
+                  <span *ngIf="UserEmail.errors.required">Email is Required</span>
+                    <span *ngIf = "UserEmail.errors.email"> 
+                        Invalid Email Format 
+                    </span>                   
+                </div>
+          </div>
+      </mat-card><mat-card>
+        <p id="add-user-error"></p>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </mat-card>
+      </form>
+  </div>
+  </div>
+  <div class="col-sm-4"></div>
+</div>
+
+</body>

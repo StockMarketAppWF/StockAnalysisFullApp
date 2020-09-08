@@ -1,0 +1,121 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+<div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+
+
+        <input
+          class="form-control"
+          placeholder="Search by company name"
+          [(ngModel)]="name"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchCompany()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Company List</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>Company ID</th>
+          <th>Company Name</th>
+  
+        </tr>
+        </thead>
+        <tbody>
+           
+        <tr *ngFor="let company of companys; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveCompany(company, i)">
+     
+            <td>{{company.company_id}}</td>
+            <td>{{company.company_name}}</td>
+
+        </tr> 
+        </tbody>
+        </table> 
+
+      <!-- <ul class="list-group">
+          <tr>
+        <lis
+          class="list-group-item"
+          *ngFor="let ipo of ipos; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveCompany(ipo, i)"
+        >
+         
+           {{ ipo.company_id }} 
+        </li>
+      </ul>   -->
+  
+    </div>
+
+    <div class="col-md-6">
+      <div *ngIf="currentCompany">
+        <h4>Company</h4>
+        <div>
+          <label><strong>Company Id:</strong></label> {{ currentCompany.company_id }}
+        </div>
+        <div>
+          <label><strong>Company Name:</strong></label> {{ currentCompany.company_name }}
+        </div>
+        <div>
+          <label><strong>Turn Over:</strong></label>
+          {{ currentCompany.turnover }}
+        </div>
+        <div>
+          <label><strong>CEO:</strong></label>
+          {{ currentCompany.ceo}}
+        </div>
+        <div>
+            <label><strong>Board of directors:</strong></label>
+            {{ currentCompany.board_of_directors}}
+          </div>   
+         
+          <div>
+            <label><strong>Write Up</strong></label>
+            {{ currentCompany.write_up}}
+          </div>
+          <div>
+            <label><strong>Sector Id:</strong></label>
+            {{ currentCompany.sector_id}}
+          </div>
+
+        <a class="badge badge-warning" href="/success/editcompany/{{ currentCompany.company_id }}">
+         Edit  </a> <br>
+         <button class="badge badge-danger mr-2" (click)="deleteCompany()">
+          Delete
+        </button>
+      </div>
+  
+      <div *ngIf="!currentCompany">
+        <br />
+        <p>Please click on an Company...</p>
+      </div>
+    </div>
+  </div>
+  

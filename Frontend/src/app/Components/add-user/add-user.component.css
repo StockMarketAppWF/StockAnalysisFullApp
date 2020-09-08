@@ -1,0 +1,18 @@
+.mat-card{
+    align-self: center;
+}
+
+.signup-bar{
+    background:aquamarine;
+}
+
+
+#add-user-header{
+    text-align: center;
+    color: grey;
+    
+}
+
+#add-user-error{
+    color: red;
+}

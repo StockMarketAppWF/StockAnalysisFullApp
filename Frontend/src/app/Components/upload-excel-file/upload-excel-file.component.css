@@ -1,0 +1,14 @@
+.input-group{
+	margin: 10px
+}
+
+.btn-outline-primary{
+	margin-left: 5px
+}
+
+.btn-success {
+    color: yellow;
+    margin-left: 5px;
+    background-color: #23a544;
+    border-color : red;
+}

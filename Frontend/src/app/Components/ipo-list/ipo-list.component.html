@@ -1,0 +1,119 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+
+
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Search by company id"
+        [(ngModel)]="id"
+      />
+      <div class="input-group-append">
+        <button
+          class="btn btn-outline-secondary"
+          type="button"
+          (click)="searchIpo()"
+        >
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>IPO List</h4>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>IPO ID</th>
+        <th>Company ID</th>
+
+      </tr>
+      </thead>
+      <tbody>
+         
+      <tr *ngFor="let ipo of ipos; let i = index"
+      [class.active]="i == currentIndex"
+      (click)="setActiveIpo(ipo, i)">
+   
+          <td>{{ipo.ipo_id}}</td>
+          <td>{{ipo.company_id}}</td>
+
+      </tr> 
+      </tbody>
+      </table> 
+
+    <!-- <ul class="list-group">
+        <tr>
+      <li
+        class="list-group-item"
+        *ngFor="let ipo of ipos; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveIpo(ipo, i)"
+      >
+       
+         {{ ipo.company_id }} 
+      </li>
+    </ul>   -->
+
+  </div>
+
+  <div class="col-md-6">
+    <div *ngIf="currentIpo">
+      <h4>Ipo</h4>
+      <div>
+        <label><strong>Ipo Id:</strong></label> {{ currentIpo.ipo_id }}
+      </div>
+      <div>
+        <label><strong>Company Id:</strong></label>
+        {{ currentIpo.company_id }}
+      </div>
+      <div>
+        <label><strong>Number of shares:</strong></label>
+        {{ currentIpo.num_of_shares}}
+      </div>
+      <div>
+          <label><strong>Price per share:</strong></label>
+          {{ currentIpo.price_per_share}}
+        </div>   
+       
+        <div>
+          <label><strong>Open Date</strong></label>
+          {{ currentIpo.open_date}}
+        </div>
+        <div>
+          <label><strong>Remarks:</strong></label>
+          {{ currentIpo.remarks}}
+        </div>
+
+      <a class="badge badge-warning" href="/success/editipo/{{ currentIpo.company_id }}">
+       Edit  </a>
+       <button class="badge badge-danger mr-2" (click)="deleteIpo(currentIpo.ipo_id)">
+        Delete
+      </button>
+    </div>
+
+    <div *ngIf="!currentIpo">
+      <br />
+      <p>Please click on an Ipo...</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,86 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+<div class="row d-flex justify-content-center container">
+  <div class="col-md-8">
+    <div class="card-hover-shadow-2x mb-3 card">
+      <div class="card-header-tab card-header">
+        <div
+          class="card-header-title font-size-lg text-capitalize font-weight-normal"
+        >
+          <i class="fa fa-tasks"></i>&nbsp;Stock Exchange List
+        </div>
+      </div>
+      <div class="scroll-area-sm">
+        <perfect-scrollbar class="ps-show-limits">
+          <div style="position: static" class="ps ps--active-y">
+            <div class="ps-content">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item" *ngFor="let item of items">
+                  <div class="todo-indicator bg-warning"></div>
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left mr-2"></div>
+                      <div class="widget-content-left">
+                        <div class="widget-heading">
+                          <a
+                            routerLink="/success/details/{{ item.exchangeId }}"
+                            routerLinkActive="active"
+                            (click)="GoToExchange(item)"
+                            >{{ item.brief }}</a
+                          >
+                          <div class="badge badge-danger ml-2">
+                            ID : {{ item.exchangeId }}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="todo-indicator bg-focus"></div>
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left mr-2"></div>
+                      <div class="widget-content-left">
+                        <div class="widget-heading">
+                          <a
+                            routerLink="/details"
+                            routerLinkActive="active"
+                          ></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </perfect-scrollbar>
+      </div>
+      <div class="d-block text-right card-footer">
+        <button
+          class="btn btn-primary"
+          routerLink="/success/addstock"
+          routerLinkActive="active"
+        >
+          Add New Exchange
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

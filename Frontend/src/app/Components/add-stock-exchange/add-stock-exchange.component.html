@@ -1,0 +1,39 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<form>
+  <div class="form-group">
+    <label for="exchangeId">Exchange Id</label>
+    <input type="text" class="form-control" required id="exchangeId" />
+  </div>
+  <div class="form-group">
+    <label for="brief">Exchange Brief</label>
+    <input type="text" class="form-control" required id="brief" />
+  </div>
+  <div class="form-group">
+    <label for="address">Exchange Address</label>
+    <input type="text" class="form-control" required id="address" />
+  </div>
+  <div class="form-group">
+    <label for="remarks">Exchange Remarks</label>
+    <input type="text" class="form-control" id="remarks" required />
+  </div>
+  <button type="button" class="btn btn-primary" (click)="addExchange()">
+    Add
+  </button>
+</form>

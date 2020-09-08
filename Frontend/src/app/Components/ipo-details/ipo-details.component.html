@@ -1,0 +1,106 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<div *ngIf="currentipo" class="edit-form">
+    <h4>IPO</h4>
+    <form>
+      <!-- <div class="form-group">
+        <label for="id">ipo</label>
+        <input
+          type="number"
+          class="form-control"
+          id="id"
+          [(ngModel)]="currentipo.ipo_id"
+          name="id"
+        />
+      </div> -->
+      <div class="form-group">
+        <label for="company_id">company_id</label>
+        <input
+          type="number"
+          class="form-control"
+          id="company_id"
+          [(ngModel)]="currentipo.company_id"
+          name="company_id"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="price_per_share">Price Per Share</label>
+        <input
+          class="form-control"
+          id="price_per_share"
+          required
+          [(ngModel)]="currentipo.price_per_share"
+          name="price_per_share"
+        />
+      </div>
+  
+      <div class="form-group">
+        <label for="num_of_shares">Number of shares</label>
+        <input
+          class="form-control"
+          id="num_of_shares"
+          required
+          [(ngModel)]="currentipo.num_of_shares"
+          name="num_of_shares"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="open_date">Open Date</label>
+        <input
+          class="form-control"
+          type="date"
+          id="open_date"
+          required
+          [(ngModel)]="currentipo.open_date"
+          name="open_date"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="remarks">Remarks</label>
+        <input
+          class="form-control"
+          id="remarks"
+          required
+          [(ngModel)]="currentipo.remarks"
+          name="remarks"
+        />
+      </div>
+  
+   
+    </form>
+  
+
+    <!-- <button class="badge badge-danger mr-2" (click)="deleteIpo()">
+      Delete
+    </button> -->
+   
+    <button type="submit" class="badge badge-success" (click)="updateIpo()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  
+  <div *ngIf="!currentipo">
+    <br />
+    <p>Cannot access this Ipo...</p>
+  </div>
+  

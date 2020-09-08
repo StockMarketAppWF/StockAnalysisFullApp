@@ -1,0 +1,84 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm">
+      <div class="row">
+        <form [formGroup]="companyForm1" >
+            <h1>Company 1</h1>
+            <div class="form-group">
+              <label for="companySelect1">Select Company</label>
+              <select class="form-control" id="companySelect1" formControlName="companySelect1">
+                <option *ngFor="let company of companies" value={{company.company_name}}>{{company.company_name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+                <label for="stockExchangeSelect1">Select StockExchange</label>
+                <select class="form-control" id="stockExchangeSelect1" formControlName="stockExchangeSelect1">
+                  <option *ngFor="let stockExchange of stockExchanges" value={{stockExchange.brief}}>{{stockExchange.brief}}</option>
+                </select>
+              </div>
+          </form>
+      </div>
+      <div class="row">
+        <form [formGroup]="companyForm2" >
+          <h1>Company 2</h1>
+          <div class="form-group">
+            <label for="companySelect2">Select Company</label>
+            <select class="form-control" id="companySelect2" formControlName="companySelect2">
+              <option *ngFor="let company of companies" value={{company.company_name}}>{{company.company_name}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+              <label for="stockExchangeSelect2">Select StockExchange</label>
+              <select class="form-control" id="stockExchangeSelect2" formControlName="stockExchangeSelect2">
+                <option *ngFor="let stockExchange of stockExchanges" value={{stockExchange.brief}}>{{stockExchange.brief}}</option>
+              </select>
+            </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-sm">
+      <h1>Comparison Chart</h1>
+      <form [formGroup]="dateForm">
+        <div class="form-group">
+          <label for="fromDate">From Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="fromDate" formControlName="fromDate">
+          <label for="toDate">From Date</label>
+          <input type="text" placeholder="YYYY-MM-DD" class="form-control" id="toDate" formControlName="toDate">
+        </div>
+     </form>
+      <button (click)="getStocks()" type="button" class="btn btn-primary">Generate Chart</button>
+      <div>
+        <div style="display: block">
+          <canvas baseChart
+                  [datasets]="lineChartData"
+                  [labels]="lineChartLabels"
+                  [options]="lineChartOptions"
+                  [legend]="lineChartLegend"
+                  [chartType]="lineChartType">
+          </canvas>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+

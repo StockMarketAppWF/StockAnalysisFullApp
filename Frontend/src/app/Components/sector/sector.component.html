@@ -1,0 +1,244 @@
+<div>
+  <div class = "page-title">
+    <h2>Sector Details Section</h2>
+  </div>
+  <mat-card class="sector-card">
+    <mat-tab-group>
+      <mat-tab label = "Sector Details">
+        <div class = "details-container">
+          <div class = "sector-list">
+            <h2 class = "title-text">List of Sectors</h2>
+            <table class="table full-width">
+              <thead>
+                <tr>
+                  <th class = "table-head" scope="col">ID</th>
+                  <th class = "table-head" scope="col">Sector Name</th>
+                  <th class = "table-head" scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sector of sectors" class='table-row'>
+                  <td>{{sector.sectorId}}</td>
+                  <td>{{sector.sectorName}}</td>
+                  <td>
+                    <button
+                      (click) = "selectSector(sector.sectorId)"
+                      type="button"
+                      name="show-company-button"
+                    >
+                      Show Companies
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class = 'company-list'>
+            <h2 class = "title-text">List of Companies in a Sector</h2>
+            <p>Sector Name: {{selectedSector.sectorName}} </p>
+            <p>Brief: {{selectedSector.brief}}</p>
+            <table class="table full-width">
+              <thead>
+                <tr>
+                  <th class = "table-head" scope="col">Company ID</th>
+                  <th class = "table-head" scope="col">Name</th>
+                  <th class = "table-head" scope="col">Turnover</th>
+                  <th class = "table-head" scope="col">CEO</th>
+                  <th class = "table-head" scope="col">Directors</th>
+                  <th class = "table-head" scope="col">Write Up</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let company of companies" class='table-row'>
+                  <td>{{company.companyId}}</td>
+                  <td>{{company.companyName}}</td>
+                  <td>{{company.turnover}}</td>
+                  <td>{{company.ceo}}</td>
+                  <td>{{company.companyboardOfDirectors}}</td>
+                  <td>{{company.companywriteUp}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label = "Compare Sectors">
+        <div class = 'compare-container'>
+          <div class = 'compare-select'>
+            <h2 class = "title-text">Select Comparison Parameters</h2>
+            <div class = 'compare-form'>
+              <p>Select Two Sectors:</p>
+              <div class="sector-form">
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Sector 1</mat-label>
+                  <mat-select [(value)]="compareSector1">
+                    <mat-option
+                      *ngFor="let sector of sectors"
+                      value= "{{sector.sectorId}}"
+                    >
+                      {{sector.sectorName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Sector 2</mat-label>
+                  <mat-select [(value)]="compareSector2">
+                    <mat-option
+                      *ngFor="let sector of sectors"
+                      value= "{{sector.sectorId}}"
+                    >
+                      {{sector.sectorName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <p>Select Date Range:</p>
+              <div class="sector-form">
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Start date</mat-label>
+                  <input matInput [matDatepicker]="startDate" (dateChange)="onStartDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                  <mat-datepicker #startDate></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>End date</mat-label>
+                  <input matInput [matDatepicker]="endDate" (dateChange)="onEndDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                  <mat-datepicker #endDate></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div class = 'full-width'>
+                <button
+                  mat-raised-button
+                  class = 'button full-width'
+                  (click) = "handleCompareSector()"
+                >
+                   Compare
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf = 'showGraph' class = 'compare-charts'>
+            <h2 class = "title-text">Comparison Charts</h2>
+            <div class="sector-name">
+              <div class="sector-details">
+                <h3 class = "center">Sector 1</h3>
+                <p>{{compareSectorData1.sectorName}}</p>
+                <p>{{compareSectorData1.brief}}</p>
+                <p>Registered Companies: {{compareSectorData1.noOfCompanies}}</p>
+              </div>
+              <div class="sector-details">
+                <h3 class = "center">Sector 2</h3>
+                <p>{{compareSectorData2.sectorName}}</p>
+                <p>{{compareSectorData2.brief}}</p>
+                <p>Registered Companies: {{compareSectorData2.noOfCompanies}}</p>
+              </div>
+            </div>
+            <div class="sector-name">
+              <div class="compare-graph">
+                <canvas baseChart
+                  [datasets]="avgChartData"
+                  [labels]= "avgChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+              <div class="compare-graph">
+                <canvas baseChart
+                  [datasets]="highChartData"
+                  [labels]= "highChartLabels"
+                  [options]="barChartOptions"
+                  [legend]="barChartLegend"
+                  [chartType]="barChartType">
+                </canvas>
+              </div>
+            </div>
+            <div class="compare-graph">
+              <canvas baseChart
+                [datasets]="lowChartData"
+                [labels]= "lowChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab label = "Compare Companies By Sector">
+        <div class = 'compare-container'>
+          <div class = 'compare-select'>
+            <h2 class = "title-text">Select Comparison Parameters</h2>
+            <div class = 'compare-form'>
+              <p>Select Sector Name</p>
+              <div class="sector-form">
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Sector Name</mat-label>
+                  <mat-select [(value)]="sectorNameForPie">
+                    <mat-option
+                      *ngFor="let sector of sectors"
+                      value= "{{sector.sectorId}}"
+                    >
+                      {{sector.sectorName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <p>Select Date Range:</p>
+              <div class="sector-form">
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Start date</mat-label>
+                  <input matInput [matDatepicker]="startDate2" (dateChange)="onStartDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="startDate2"></mat-datepicker-toggle>
+                  <mat-datepicker #startDate2></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>End date</mat-label>
+                  <input matInput [matDatepicker]="endDate2" (dateChange)="onEndDateChange($event)">
+                  <mat-datepicker-toggle matSuffix [for]="endDate2"></mat-datepicker-toggle>
+                  <mat-datepicker #endDate2></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class = 'full-width' appearance="fill">
+                  <mat-label>Chart Type</mat-label>
+                  <mat-select [(value)]="chartType">
+                    <mat-option value = "bar" >Bar</mat-option>
+                    <mat-option value = "pie">Pie</mat-option>
+                    <mat-option value ="doughnut">Doughnut</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class = 'full-width'>
+                <button
+                  mat-raised-button
+                  class = 'button full-width'
+                  (click) = "handleCompareCompanyBySector()"
+                >
+                   Compare
+                </button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf = 'showPie' class = 'compare-charts'>
+            <h2 class = "title-text">Comparison Charts</h2>
+            <div class="sector-name">
+              <div class="compare-graph">
+                <p>Stock Average Price Comparison</p>
+                <canvas id = 'compare-company1'></canvas>
+              </div>
+              <div class="compare-graph">
+                <p>Stock Maximum Price Comparison</p>
+                <canvas id = 'compare-company2'></canvas>
+              </div>
+            </div>
+            <div class="compare-graph">
+              <p>Stock Minimum Price Comparison</p>
+              <canvas id = 'compare-company3'></canvas>
+            </div>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-card>
+</div>

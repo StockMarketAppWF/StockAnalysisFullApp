@@ -1,0 +1,107 @@
+<div>
+  <br/>
+  <div id = "div-dashboard-head">
+      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  </div>
+</div>
+<br/>
+<div *ngIf="currentcompany" class="edit-form">
+    <h4>Company</h4>
+    <form>
+        <div class="form-group">
+            <label for="company_name">Company Name</label>
+            <input
+              class="form-control"
+              id="company_name"
+              required
+              [(ngModel)]="currentcompany.company_name"
+              name="company_name"
+            />
+          </div>
+      
+          <div class="form-group">
+            <label for="turnover">Turn Over</label>
+            <input
+              class="form-control"
+              id="turnover"
+              required
+              [(ngModel)]="currentcompany.turnover"
+              name="turnover"
+            />
+          </div>
+    
+          <div class="form-group">
+            <label for="ceo">CEO</label>
+            <input
+              class="form-control"
+              id="ceo"
+              required
+              [(ngModel)]="currentcompany.ceo"
+              name="ceo"
+            />
+          </div>
+    
+          <div class="form-group">
+            <label for="board_of_directors">Board of directors</label>
+            <input
+              class="form-control"
+              id="board_of_directors"
+              required
+              [(ngModel)]="currentcompany.board_of_directors"
+              name="board_of_directors"
+            />
+          </div>
+    
+     
+      <div class="form-group">
+        <label for="write_up">Write Up</label>
+        <input
+          class="form-control"
+          id="write_up"
+          required
+          [(ngModel)]="currentcompany.write_up"
+          name="write_up"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="sector_id">Sector Id</label>
+        <input
+          class="form-control"
+          type="number"
+          id="sector_id"
+          required
+          [(ngModel)]="currentcompany.sector_id"
+          name="sector_id"
+        />
+      </div>
+  
+   
+    </form>
+  
+
+    <!-- <button class="badge badge-danger mr-2" (click)="deleteCompany()">
+      Delete
+    </button> -->
+   
+    <button type="submit" class="badge badge-success" (click)="updateCompany()">
+      Update
+    </button>
+    <p>{{ message }}</p>
+  </div>
+  
+  <div *ngIf="!currentcompany">
+    <br />
+    <p>Cannot access this Company...</p>
+  </div>
+  
