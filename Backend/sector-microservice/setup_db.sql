@@ -47,9 +47,7 @@ create table user (
     user_id integer not null auto_increment,
     confirmed bit default 0 not null,
     email varchar(255) not null,
-    first_name varchar(255) not null,
-    last_name varchar(255),
-    mobile varchar(255) not null,
+    full_name varchar(255) not null,
     user_type ENUM('CONSUMER', 'ADMIN') default 'CONSUMER' not null,
     username varchar(255) not null,
     primary key (user_id)

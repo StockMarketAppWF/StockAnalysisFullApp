@@ -46,21 +46,30 @@ export class UploadExcelFileComponent implements OnInit {
   }
 
   onUpload(){
-    const fd = new FormData();
-    fd.append('excel',this.selectedFile, this.selectedFile.name);
-    this.http.post("http://localhost:8080/api/excel/upload", fd)
-        .subscribe(res=>{
-         if (res) {
-           
-             localStorage.setItem('currentData', JSON.stringify(res));
-         }
-         if(localStorage.getItem('currentData')) {
-          this.jsonResponseData = JSON.parse(localStorage.getItem('currentData'));
-          this.jsonRespnseMessage = this.jsonResponseData.message;
-          alert(this.jsonRespnseMessage);
-          this.jsonInsertedDetails = this.jsonResponseData.stockInsertedDetails;
-          this.showMsgBoolean = true;
-        }
-       }); 
+    if(this.selectedFile===null)
+    {
+      alert("No file selected");
+    }
+    else
+    {
+      const fd = new FormData();
+      fd.append('excel',this.selectedFile, this.selectedFile.name);
+      this.http.post("http://localhost:8082/api/excel/upload", fd)
+          .subscribe(res=>{
+          if (res) {
+              console.log(res);
+              localStorage.setItem('currentData', JSON.stringify(res));
+          }
+          if(localStorage.getItem('currentData')) {
+            this.jsonResponseData = JSON.parse(localStorage.getItem('currentData'));
+            this.jsonRespnseMessage = this.jsonResponseData.message;
+            alert(this.jsonRespnseMessage);
+            this.jsonInsertedDetails = this.jsonResponseData.stockInsertedDetails;
+            this.showMsgBoolean = true;
+            this.selectedFile = null;
+            this.chooseFileMessage = "Choose File";
+          }
+        }); 
+    }
   }
 }

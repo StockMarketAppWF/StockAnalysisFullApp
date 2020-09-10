@@ -1,5 +1,5 @@
 export class Sector{
-    id : string;
-    sector : string;
-    description : string
+    sectorId : number;
+    sectorName : string;
+    brief : string
 }

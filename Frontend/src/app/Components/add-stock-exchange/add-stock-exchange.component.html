@@ -1,39 +1,54 @@
 <div>
-  <br/>
-  <div id = "div-dashboard-head">
-      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  <h5 class="card-header info-color white-text text-center py-4">
+    <strong>Add Stock Exchange</strong>
+  </h5>
+
+  <!--Card content-->
+  <div class="card-body px-lg-5 pt-0">
+    <!-- Form -->
+    <form style="color: #757575" name="exchangeForm" ngNativeValidate>
+      <!-- Name -->
+      <div class="md-form mt-3">
+        <label for="exchangeId">Enter Id</label>
+        <input
+          type="text"
+          id="exchangeId"
+          class="form-control"
+          ng-model="exchangeId"
+          autofocus=""
+          ng-class="{ 'has-error': exchangeForm.exchangeId.$error.required }"
+          required
+        />
+      </div>
+
+      <div class="md-form mt-3">
+        <label for="brief">Enter Brief</label>
+        <input type="text" id="brief" class="form-control" />
+      </div>
+
+      <div class="md-form mt-3">
+        <label for="address">Enter Address</label>
+        <input type="text" id="address" class="form-control" />
+      </div>
+
+      <!--Message-->
+      <div class="md-form">
+        <label for="remarks">Enter Remarks</label>
+        <textarea
+          id="remarks"
+          class="form-control md-textarea"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <!-- Send button -->
+      <button
+        class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect"
+        type="submit"
+        (click)="addExchange()"
+      >
+        Add
+      </button>
+    </form>
   </div>
 </div>
-<br/>
-
-<form>
-  <div class="form-group">
-    <label for="exchangeId">Exchange Id</label>
-    <input type="text" class="form-control" required id="exchangeId" />
-  </div>
-  <div class="form-group">
-    <label for="brief">Exchange Brief</label>
-    <input type="text" class="form-control" required id="brief" />
-  </div>
-  <div class="form-group">
-    <label for="address">Exchange Address</label>
-    <input type="text" class="form-control" required id="address" />
-  </div>
-  <div class="form-group">
-    <label for="remarks">Exchange Remarks</label>
-    <input type="text" class="form-control" id="remarks" required />
-  </div>
-  <button type="button" class="btn btn-primary" (click)="addExchange()">
-    Add
-  </button>
-</form>

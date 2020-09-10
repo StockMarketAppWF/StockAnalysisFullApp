@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CompanyService } from 'src/app/services/company.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from './../../global';
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
@@ -17,7 +18,11 @@ export class CompanyListComponent implements OnInit {
   constructor(private companyService: CompanyService,
     private route: ActivatedRoute,
     private router: Router)
-  { }
+  {
+    if(myGlobals.getStatus()==false){
+      this.router.navigate(['/']);
+    }
+   }
 
   ngOnInit() {
     this.retrieveCompanys();

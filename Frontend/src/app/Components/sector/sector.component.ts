@@ -1,13 +1,17 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, range } from 'rxjs';
+import Chart from 'chart.js';
+
+import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from './../../global';
+import { Company } from '../../models/company-data';
 import { Sector } from '../../models/sector-data';
 import { ChartDetails } from './../../models/charts';
 import { SectorCompare, CompanyPriceDetails } from '../../models/sector-compare-data';
 import { SectorService } from '../../services/sector.service';
 import { ChartsService } from './../../services/charts.service';
+
 import Utils from '../../helpers/utils';
-import { Observable, range } from 'rxjs';
-import Chart from 'chart.js';
-import { Company } from '../../models/company-data';
 
 @Component({
   selector: 'app-sector',
@@ -15,99 +19,108 @@ import { Company } from '../../models/company-data';
   styleUrls: ['./sector.component.css']
 })
 export class SectorComponent implements OnInit {
-
-  backgroundColor(){
-    return 'rgb('
-       + Math.round(Math.random() *255) + ','
-       + Math.round(Math.random() *255) + ','
-       + Math.round(Math.random() *255)
-       + ')';
-  }
-  ngOnInit(): void {
-  }
-
+//  @Input()
+  sectors : Sector[] = [];
+  companies : Company[] = [];
+  selectedSector: Sector = new Sector();
   compareSector1;
   compareSector2;
-  sectors : Sector[] = [];
-  
-  companies : Company[] = [];
-
-  selectedSector: Sector = new Sector();
   startDate: Date = new Date();
   endDate;
   startDate2;
   endDate2;
   showGraph: boolean = false;
   showPie: boolean = true;
-  
-
-  sectorNameForPie;
-  chartType;
-
   compareSectorData1: SectorCompare = new SectorCompare();
   compareSectorData2: SectorCompare = new SectorCompare();
   compareSectorData: SectorCompare = new SectorCompare();
+  sectorNameForPie;
+  chartType;
 
-    barChartOptions = {
+  public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
-  barChartType = 'bar';
-  barChartLegend = true;
+  public barChartType = 'bar';
+  public barChartLegend = true;
 
-  avgChartLabels = ['Highest Average'];
-  highChartLabels = ['Highest High'];
-    lowChartLabels = ['Lowest Low'];
+  public avgChartLabels = ['Highest Average'];
+  public highChartLabels = ['Highest High'];
+  public lowChartLabels = ['Lowest Low'];
 
-    avgChartData = [];
-    highChartData = [];
-    lowChartData = [];
+  public avgChartData = [];
+  public highChartData = [];
+  public lowChartData = [];
 
-  constructor(private sectorService: SectorService ) {
+  constructor(private sectorService: SectorService, private router: Router ) {
+
+    if(myGlobals.getStatus()==false){
+      this.router.navigate(['/']);
+    }
+
     sectorService.fetchSectors().subscribe(data => {
       this.sectors = data as Sector[];
     });
   }
-  
-  handleCompareSector() {
-    const id1 = this.compareSector1;
-    const id2 = this.compareSector2;
-    this.fetchSectorCompare(id1, id2, this.startDate, this.endDate);
+
+  onStartDateChange(event) {
+    var date = new Date(event.value);
+    this.startDate = date;
+    this.startDate2 = date;
   }
+
+  onEndDateChange(event) {
+    var date = new Date(event.value);
+    this.endDate = date;
+    this.endDate2 = date;
+  }
+
   selectSector(id) {
     this.sectorService.fetchSectorCompanies(id).subscribe(data => {
       this.companies = data.companies as Company[];
-      this.selectedSector.id = data.id;
-      this.selectedSector.sector = data.sector;
-      this.selectedSector.description = data.description;
+      this.selectedSector.sectorId = data.sectorId;
+      this.selectedSector.sectorName = data.sectorName;
+      this.selectedSector.brief = data.brief;
     });
   }
+
+  handleCompareSector() {
+    const id1 = this.compareSector1;
+    const id2 = this.compareSector2;
+
+    this.fetchSectorCompare(id1, id2, this.startDate, this.endDate);
+  }
+
   fetchSectorCompare(id1, id2, startDate, endDate) {
     const sDate = Utils.convertDate(startDate);
     const eDate = Utils.convertDate(endDate);
     this.avgChartData = [];
     this.highChartData = [];
     this.lowChartData = [];
+
     this.sectorService.fetchSectorWithPrices(id1, sDate, eDate).subscribe(data => {
-      this.compareSectorData1.id = data.id;
-      this.compareSectorData1.sector = data.sector;
-      this.compareSectorData1.description = data.description;
+      this.compareSectorData1.sectorId = data.sectorId;
+      this.compareSectorData1.sectorName = data.sectorName;
+      this.compareSectorData1.brief = data.brief;
       this.compareSectorData1.noOfCompanies = data.noOfCompanies;
       this.compareSectorData1.highestAvg = data.highestAvg;
       this.compareSectorData1.highestHigh = data.highestHigh;
       this.compareSectorData1.lowestLow = data.lowestLow;
+
       var avgChart = {
         data: [data.highestAvg.stockPrice],
         label: "Sector 1 -" + data.highestAvg.companyName,
         backgroundColor: this.backgroundColor()
       }
       this.avgChartData.push(avgChart);
+
       var highChart = {
         data: [data.highestHigh.stockPrice],
         label: "Sector 1 - " + data.highestHigh.companyName,
         backgroundColor: this.backgroundColor()
       }
       this.highChartData.push(highChart);
+
       var lowChart = {
         data: [data.lowestLow.stockPrice],
         label: "Sector 1 - " + data.lowestLow.companyName,
@@ -116,10 +129,11 @@ export class SectorComponent implements OnInit {
       this.lowChartData.push(lowChart);
       this.showGraph = true;
     });
+
     this.sectorService.fetchSectorWithPrices(id2, sDate, eDate).subscribe(data => {
-      this.compareSectorData2.id = data.id;
-      this.compareSectorData2.sector= data.sector;
-      this.compareSectorData2.description = data.description;
+      this.compareSectorData2.sectorId = data.sectorId;
+      this.compareSectorData2.sectorName = data.sectorName;
+      this.compareSectorData2.brief = data.brief;
       this.compareSectorData2.noOfCompanies = data.noOfCompanies;
       this.compareSectorData2.highestAvg = data.highestAvg;
       this.compareSectorData2.highestHigh = data.highestHigh;
@@ -137,7 +151,8 @@ export class SectorComponent implements OnInit {
         backgroundColor: this.backgroundColor()
       }
       this.highChartData.push(highChart);
-      let lowChart = {
+
+      var lowChart = {
         data: [data.highestHigh.stockPrice],
         label: "Sector 2 - " + data.highestHigh.companyName,
         backgroundColor: this.backgroundColor()
@@ -210,14 +225,14 @@ export class SectorComponent implements OnInit {
     }
   });
   }
-  onStartDateChange(event) {
-    var date = new Date(event.value);
-    this.startDate = date;
-    this.startDate2 = date;
+
+  backgroundColor(){
+    return 'rgb('
+       + Math.round(Math.random() *255) + ','
+       + Math.round(Math.random() *255) + ','
+       + Math.round(Math.random() *255)
+       + ')';
   }
-  onEndDateChange(event) {
-    var date = new Date(event.value);
-    this.endDate = date;
-    this.endDate2 = date;
+  ngOnInit(): void {
   }
 }

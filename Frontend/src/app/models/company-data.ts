@@ -1,6 +1,6 @@
 export class Company{
-    cid : string;
-    company : string;
+    companyId : number;
+    companyName : string;
     turnover : string;
     ceo : string;
     boardOfDirectors : string;

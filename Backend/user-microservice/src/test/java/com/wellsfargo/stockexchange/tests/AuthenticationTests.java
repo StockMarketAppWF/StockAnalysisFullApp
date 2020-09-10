@@ -37,5 +37,15 @@ public class AuthenticationTests {
 			user.setUserType(UserTypes.ADMIN);
 			when(userRepo.save(user)).thenReturn(user);
 			assertEquals(user, authenticationService.save(user));
+			
+			User user = new User();
+			user.setUsername("user");
+			user.setPassword("12345");
+			user.setFullName("Tmp Iyer");
+			user.setConfirmed(true);
+			user.setEmail("xyz@gmail.com");
+			user.setUserType(UserTypes.USER);
+			when(userRepo.save(user)).thenReturn(user);
+			assertEquals(user, authenticationService.save(user));
 		}
 }

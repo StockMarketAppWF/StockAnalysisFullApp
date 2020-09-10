@@ -32,6 +32,8 @@ import { ExchangeDetailsComponent } from "./Components/exchange-details/exchange
 import { AddStockExchangeComponent } from "./Components/add-stock-exchange/add-stock-exchange.component";
 import { SectorComponent } from "./Components/sector/sector.component";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { AdminLoginComponent } from './Components/admin-login/admin-login.component';
+import { SuccessAdminComponent } from './Components/success-admin/success-admin.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     ExchangeComponent,
     ExchangeDetailsComponent,
     AddStockExchangeComponent,
-    SectorComponent
+    SectorComponent,
+    AdminLoginComponent,
+    SuccessAdminComponent
   ],
   imports: [
     CustomMaterialModule,

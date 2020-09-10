@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ChartsService {
+
   constructor() { }
   showChartService(companyPriceData,chartType){
     console.log(companyPriceData);
@@ -14,7 +15,7 @@ export class ChartsService {
 
     for(const company of companyPriceData)
     {
-      chartDetails.chartLabels.push(company.company);
+      chartDetails.chartLabels.push(company.companyName);
       chartDetails.avgPrice.push(company.averagePrice);
       chartDetails.minPrice.push(company.minPrice);
       chartDetails.maxPrice.push(company.maxPrice);

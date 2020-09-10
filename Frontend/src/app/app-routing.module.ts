@@ -17,6 +17,10 @@ import { ExchangeComponent } from "./Components/exchange/exchange.component";
 import { ExchangeDetailsComponent } from "./Components/exchange-details/exchange-details.component";
 import { AddStockExchangeComponent } from "./Components/add-stock-exchange/add-stock-exchange.component";
 import { SectorComponent } from "./Components/sector/sector.component";
+import { AdminLoginComponent } from './Components/admin-login/admin-login.component';
+import { SuccessAdminComponent } from './Components/success-admin/success-admin.component';
+
+
 
 const routes: Routes = [
   { path: "", redirectTo: "/user-login", pathMatch: "full" },
@@ -32,11 +36,29 @@ const routes: Routes = [
   { path: "success/addcompany", component: AddCompanyComponent },
   { path: "success/viewcompany", component: ViewCompanyComponent },
   { path: "success/viewipo", component: ViewIpoComponent },
-  { path: "success/uploadexcel", component: UploadExcelFileComponent },
   { path: "success/exchange", component: ExchangeComponent },
   { path: "success/details/:id", component: ExchangeDetailsComponent },
   { path: "success/addstock", component: AddStockExchangeComponent },
-  { path: "success/sector", component: SectorComponent }
+  { path: "success/sector", component: SectorComponent },
+  { path: "admin-login", component: AdminLoginComponent },
+  { path: "success-admin", component: SuccessAdminComponent },
+
+  
+  { path: "success-admin", component: DashboardComponent },
+  { path: "success-admin/compare-company", component: CompareCompanyComponent },
+  { path: "success-admin/ipo", component: IpoListComponent },
+  { path: "success-admin/editipo/:id", component: IpoDetailsComponent },
+  { path: "success-admin/addipo", component: AddIpoComponent },
+  { path: "success-admin/company", component: CompanyListComponent },
+  { path: "success-admin/editcompany/:id", component: CompanyDetailsComponent },
+  { path: "success-admin/addcompany", component: AddCompanyComponent },
+  { path: "success-admin/viewcompany", component: ViewCompanyComponent },
+  { path: "success-admin/viewipo", component: ViewIpoComponent },
+  { path: "success-admin/exchange", component: ExchangeComponent },
+  { path: "success-admin/details/:id", component: ExchangeDetailsComponent },
+  { path: "success-admin/addstock", component: AddStockExchangeComponent },
+  { path: "success-admin/sector", component: SectorComponent },
+  { path: "success-admin/uploadexcel", component: UploadExcelFileComponent },
 ];
 
 @NgModule({

@@ -1,20 +1,40 @@
 <div>
-  <br/>
-  <div id = "div-dashboard-head">
-      <a routerLink="../uploadexcel" class="nav-link" class="btn btn-primary active" role="button">Import Excel</a>
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../company" class="nav-link" class="btn btn-primary active" role="button">Manage Companies </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../ipo" class="nav-link" class="btn btn-primary active" role="button">Manage IPO </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../exchange" class="nav-link" class="btn btn-primary active" role="button">Manage Stock Exchange </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../addcompany" class="nav-link" class="btn btn-primary active" role="button">Create Company </a> 
-      &nbsp;&nbsp;&nbsp;&nbsp;
-      <a routerLink="../compare-company" class="nav-link" class="btn btn-primary active" role="button">Comparison Charts </a> 
+  <br />
+  <div id="div-dashboard-head">
+    <a
+      routerLink="../uploadexcel"
+      class="nav-link"
+      class="btn btn-primary active"
+      role="button"
+      >Import Excel</a
+    >
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a
+      routerLink="../exchange"
+      class="nav-link"
+      class="btn btn-primary active"
+      role="button"
+      >Manage Stock Exchange
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a
+      routerLink="../addcompany"
+      class="nav-link"
+      class="btn btn-primary active"
+      role="button"
+      >Create Company
+    </a>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <a
+      routerLink="../sector"
+      class="nav-link"
+      class="btn btn-primary active"
+      role="button"
+      >Sector Details</a
+    >
   </div>
 </div>
-<br/>
+<br />
 
 <link
   href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
@@ -215,41 +235,32 @@
   <!-- END PRIMARY CONTENT HEADING -->
   <div class="row">
     <div class="col-md-8">
-      <div class="project-section general-info">
-        <table class="table">
-          <tbody>
+      <div class="table-title">
+        <table class="table-fill">
+          <tbody class="table-hover">
             <tr>
-              <td>Brief</td>
-              <td>{{ item.brief }}</td>
+              <td class="text-left">Brief</td>
+              <td class="text-left">{{ item.brief }}</td>
             </tr>
             <tr>
-              <td>Address:</td>
-              <td>{{ item.address }}</td>
+              <td class="text-left">Address:</td>
+              <td class="text-left">{{ item.address }}</td>
             </tr>
             <tr>
-              <td>Remarks:</td>
-              <td>{{ item.remarks }}</td>
+              <td class="text-left">Remarks:</td>
+              <td class="text-left">{{ item.remarks }}</td>
+            </tr>
+            <tr>
+              <th scope="col" class="text-left">Company Name</th>
+              <th scope="col" class="text-left">Company Id</th>
+            </tr>
+            <tr *ngFor="let company of item.company">
+              <td class="text-left">{{ company.companyName }}</td>
+              <td class="text-left">{{ company.companyId }}</td>
             </tr>
           </tbody>
         </table>
-        <div class="row">
-          <div class="col-sm-9">
-            <table class="table">
-              <thead class="thead-light">
-                <tr>
-                  <th scope="col">Company Name</th>
-                  <th scope="col">Company Id</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let company of item.company">
-                  <td>{{ company.companyName }}</td>
-                  <td>{{ company.companyId }}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <br />
       </div>
       <div class="project-section activity"></div>
     </div>

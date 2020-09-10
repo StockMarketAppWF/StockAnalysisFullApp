@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { from } from "rxjs";
 import { ExchangeService } from "../../services/exchange.service";
 import { DetailService } from "../../services/detail.service";
+import * as myGlobals from './../../global';
 
 @Component({
   selector: "app-exchange",
@@ -14,7 +15,12 @@ export class ExchangeComponent implements OnInit {
     private router: Router,
     private _exchangeService: ExchangeService,
     private _detailService: DetailService
-  ) {}
+  ) {
+
+    if(myGlobals.getStatus()==false){
+      this.router.navigate(['/']);
+    }
+  }
 
   public items = [];
   ngOnInit(): void {

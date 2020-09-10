@@ -8,10 +8,10 @@
 		<version>2.1.16.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.wellsfargo.stockexchage</groupId>
-	<artifactId>company-microservice</artifactId>
+	<groupId>com.companyMicroservices</groupId>
+	<artifactId>companyMicroservices</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Company Microservice</name>
+	<name>companyMicroservices</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -42,7 +42,7 @@
         <artifactId>mysql-connector-java</artifactId>
         <scope>runtime</scope>
     </dependency>
-    <dependency>
+		    <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>
@@ -50,6 +50,7 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-tomcat</artifactId>
 		</dependency>
+
 	</dependencies>
 
 	<build>

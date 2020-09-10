@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from './../../global';
 
 @Component({
   selector: 'app-compare-company',
@@ -10,7 +12,11 @@ import { Validators, FormGroup, FormControl} from '@angular/forms';
 
 export class CompareCompanyComponent implements OnInit {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router: Router) { 
+    if(myGlobals.getStatus()==false){
+      this.router.navigate(['/']);
+    }
+  }
 
   //plot
   public lineChartOptions = {
@@ -46,16 +52,22 @@ export class CompareCompanyComponent implements OnInit {
   });
 
   ngOnInit(): void {
+
+    let baseurlCompanyDetails= "http://localhost:8081";
+    let baseurlStockExchange= "http://localhost:3795";
     
-    let resp = this.http.get("http://localhost:8080/getcompany");
+    let resp = this.http.get(baseurlCompanyDetails+"/getcompany");
     resp.subscribe((data)=>this.companies=data);
 
-    let resp2 = this.http.get("http://localhost:3795/stockexchange/getstockexchangelist");
+    let resp2 = this.http.get(baseurlStockExchange+"/stockexchange/getstockexchangelist");
     resp2.subscribe((data)=>this.stockExchanges=data);
     
   }
 
   getStocks(): void {
+
+    let baseurlCompanyDetails= "http://localhost:8081";
+    let baseurlStockExchange= "http://localhost:3795";
 
     this.lineChartData[0].data = [];
     this.lineChartLabels = [];
@@ -98,14 +110,14 @@ export class CompareCompanyComponent implements OnInit {
     }
     
 
-    let resp = this.http.get("http://localhost:8080/getstockprice/"+company1.id+"/"+fromDate+"/"+toDate+"/"+company1.exchange);
+    let resp = this.http.get(baseurlCompanyDetails+"/getstockprice/"+company1.id+"/"+fromDate+"/"+toDate+"/"+company1.exchange);
 
     resp.subscribe((data)=>
     {
       company1.stockprices = data;
       // console.log(company1);
 
-      let resp2 = this.http.get("http://localhost:8080/getstockprice/"+company2.id+"/"+fromDate+"/"+toDate+"/"+company2.exchange);
+      let resp2 = this.http.get(baseurlCompanyDetails+"/getstockprice/"+company2.id+"/"+fromDate+"/"+toDate+"/"+company2.exchange);
 
       resp2.subscribe((data)=>
       {

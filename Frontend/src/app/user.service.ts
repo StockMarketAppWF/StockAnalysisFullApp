@@ -10,7 +10,7 @@ import * as myGlobals from './global';
 
 export class UserService {
   public isLoggedIn = false;
-  private baseUrl = 'http://localhost:8082/';
+  private baseUrl = 'http://localhost:8085/';
   headerJwt;
   constructor(private http:HttpClient) { }
 
@@ -28,6 +28,10 @@ export class UserService {
 
   loginUser(loginId: object): Observable<object> {
     return this.http.post(`${this.baseUrl}`+'login', loginId);
+  }
+
+  loginAdmin(loginId: object): Observable<object> {
+    return this.http.post(`${this.baseUrl}`+'adminlogin', loginId);
   }
 
   login(): boolean{

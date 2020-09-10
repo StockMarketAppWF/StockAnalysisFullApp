@@ -9,10 +9,10 @@
 		<version>2.3.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.wellsfargo.stockexchange</groupId>
-	<artifactId>market</artifactId>
+	<groupId>com.wellsfargo.stocks</groupId>
+	<artifactId>stockexchange</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>stockexchange-market</name>
+	<name>stockexchange</name>
 	<description>Stock exchange application</description>
 
 	<properties>
@@ -73,7 +73,17 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			</dependency>
+			<version>4.13</version>
+		</dependency>
+			    <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-tomcat</artifactId>
+		</dependency>
+
 
 	</dependencies>
 
@@ -84,6 +94,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>docker-stock-exchange</finalName>
 	</build>
 
 </project>

@@ -1,6 +1,29 @@
-#Stock Market Angular
+# wellsfargo_stockMarket_angular
+StockMarket Application Angular
 
-Final Commit.. All seem working !!!
+## Work Division
+### Upload Excel Microservice
+- Aswin A
+- Tilak Shenoy
+- Vishrutha Kacham
+### Company Details Microservice
+- Reema Sebi
+- Shalini Nath
+- Pravitha Sathyavan
+- Tanmoy Ghosh
+### Sector Details Microservice
+- Abhishek Kumar
+- Tanmayee Kondeti
+- Rohit Iyer
+### Authentication Microservice
+- Rishabh Sethi
+- Shankar Ray
+### Stock Exchange Microservice
+- Aditya Chowdhury
+- Swaathi Balaji
+
+
+
 
 
 

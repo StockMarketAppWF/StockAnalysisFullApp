@@ -1,7 +1,7 @@
 export class SectorCompare {
-    id : number;
-    sector : string;
-    description : string;
+    sectorId : number;
+    sectorName : string;
+    brief : string;
     noOfCompanies: number;
     highestAvg;
     highestHigh;
@@ -9,9 +9,10 @@ export class SectorCompare {
     companiesPrice;
     companyPriceDetails : CompanyPriceDetails[];
 }
+
 export class CompanyPriceDetails{
-    cid : string;
-    company : string;
+    companyId : number;
+    companyName : string;
     minPrice : number;
     averagePrice : number;
     maxPrice : number;

@@ -1,7 +1,7 @@
 .container {
     padding-top: 50px;
     padding-bottom: 10px;
-    color: #3a68a5;
+    color: #405065;
   }
   
   .search-company {
@@ -11,7 +11,7 @@
   }
   
   .form-control {
-    box-shadow: 0 10px 40px 0 #315e9e;
+    box-shadow: 0 10px 40px 0 #B0C1D9;
   }
   .form-control::placeholder  {
     font-family: FontAwesome;

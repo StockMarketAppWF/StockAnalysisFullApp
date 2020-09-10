@@ -1,6 +1,7 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import {IpoService } from 'src/app/services/ipo.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import * as myGlobals from './../../global';
 
 @Component({
   selector: 'app-ipo-list',
@@ -18,7 +19,11 @@ export class IpoListComponent implements OnInit {
   constructor(
     private ipoService: IpoService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) { 
+      if(myGlobals.getStatus()==false){
+        this.router.navigate(['/']);
+      }
+    }
   // constructor(private ipoService: IpoService) { }
 
   ngOnInit() {

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyService } from 'src/app/services/company.service';
+import * as myGlobals from './../../global';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-add-company',
@@ -21,7 +23,12 @@ export class AddCompanyComponent implements OnInit {
   
   submitted=false;
 
-  constructor(private companyService: CompanyService) { }
+  constructor(private companyService: CompanyService, private router: Router) {
+    if(myGlobals.getStatus()==false){
+      this.router.navigate(['/']);
+    }
+
+   }
 
   ngOnInit() 
   {

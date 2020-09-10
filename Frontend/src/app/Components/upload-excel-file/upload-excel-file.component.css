@@ -7,8 +7,8 @@
 }
 
 .btn-success {
-    color: yellow;
+    color: #fff;
     margin-left: 5px;
-    background-color: #23a544;
-    border-color : red;
+    background-color: #28a745;
+    border-color: #28a745;
 }

@@ -1,0 +1,15 @@
+
+package com.wellsfargo.sector.services;
+
+import com.wellsfargo.sector.models.Sector;
+import java.util.List;
+import java.util.Map;
+
+public interface SectorService {
+    Sector createSector(String name, String brief);
+    Sector updateSector(String id, String name, String brief);
+    boolean deleteSector(String id);
+    List<Sector> getSectors();
+    Map<String, Object> getCompaniesBySectorId(String id);
+    Map<String, Object> sectorCompanyAvgPriceOnAnyExchange(String id, String startDate, String endDate);
+}

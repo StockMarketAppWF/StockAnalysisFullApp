@@ -9,7 +9,7 @@ import com.wellsfargo.stockexchange.util.UserRepository;
 import com.wellsfargo.stockexchange.models.User;
 import com.wellsfargo.stockexchange.models.enums.UserTypes;
 
-//@EnableEurekaClient
+
 @SpringBootApplication
 public class StockExchangeApplication {
 
