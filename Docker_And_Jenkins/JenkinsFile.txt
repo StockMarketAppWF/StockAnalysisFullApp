@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+    tools{
+        maven 'Jenkins-Maven'
+        jdk 'Jenkins-Java'
+    }
+
+    stages {
+        stage('Download from git') {
+            steps {
+               git 'https://github.com/StockMarketAppWF/StockAnalysisFullApp.git' 
+            }
+        }
+        stage('Move to the eureka directory') {
+            steps {
+               
+                dir('Backend') {
+                    bat "cd C:\\Windows\\System32\\config\\systemprofile\\AppData\\Local\\Jenkins.jenkins\\workspace\\StockMarketApp-eureka\\Backend\\discovery-server"
+    
+                }
+               
+            }
+        }
+        
+        stage('Maven clean') {
+            steps {
+                
+                bat "mvn -f/C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins.jenkins/workspace/StockMarketApp-eureka/Backend/discovery-server/pom.xml clean"
+                
+            }
+        }
+        stage('Maven compile') {
+            steps {
+                
+                bat "mvn -f/C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins.jenkins/workspace/StockMarketApp-eureka/Backend/discovery-server/pom.xml compile"
+                
+            }
+        }
+        stage('Maven test') {
+            steps {
+                
+                bat "mvn -f/C:/Windows/System32/config/systemprofile/AppData/Local/Jenkins.jenkins/workspace/StockMarketApp-eureka/Backend/discovery-server/pom.xml test"
+                
+            }
+        }
+    }
+}
